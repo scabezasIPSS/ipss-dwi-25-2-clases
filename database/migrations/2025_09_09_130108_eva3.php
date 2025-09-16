@@ -119,6 +119,7 @@ return new class extends Migration
         Schema::dropIfExists('entrenamientos');
         Schema::dropIfExists('jugadores');
         Schema::dropIfExists('persona');
+        Schema::dropIfExists('equipo_jugador');
         Schema::dropIfExists('equipos');
         Schema::dropIfExists('campeonato');
         Schema::dropIfExists('campeonatos_equipos');

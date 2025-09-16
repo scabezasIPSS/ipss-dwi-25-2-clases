@@ -9,6 +9,7 @@ use App\Http\Controllers\ComunasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DesarrolladorController;
 use App\Http\Controllers\DiasSemanaController;
 use App\Http\Controllers\EntrenamientosController;
 use App\Http\Controllers\EquipoJugadorController;
@@ -246,3 +247,10 @@ Route::post('/backoffice/equipo-jugador', [EquipoJugadorController::class, 'stor
 Route::post('/backoffice/equipo-jugador/down/{_id}', [EquipoJugadorController::class, 'down'])->name('backoffice.equipo-jugador.down');
 Route::post('/backoffice/equipo-jugador/up/{_id}', [EquipoJugadorController::class, 'up'])->name('backoffice.equipo-jugador.up');
 Route::post('/backoffice/equipo-jugador/destroy/{_id}', [EquipoJugadorController::class, 'destroy'])->name('backoffice.equipo-jugador.destroy');
+
+// Desarrollador: Santos y Robert
+Route::get('/backoffice/desarrollador', [DesarrolladorController::class, 'index'])->name('backoffice.desarrollador.index');
+Route::post('/backoffice/desarrollador', [DesarrolladorController::class, 'store'])->name('backoffice.desarrollador.new');
+Route::delete('/backoffice/desarrollador/down/{_id}', [DesarrolladorController::class, 'down'])->name('backoffice.desarrollador.down');
+Route::post('/backoffice/desarrollador/up/{_id}', [DesarrolladorController::class, 'up'])->name('backoffice.desarrollador.up');
+Route::delete('/backoffice/desarrollador/destroy/{_id}', [DesarrolladorController::class, 'destroy'])->name('backoffice.desarrollador.destroy');

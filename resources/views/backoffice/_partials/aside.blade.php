@@ -158,10 +158,10 @@
                 <div class="badge text-bg-danger rounded-pill ms-auto">5</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item @if (Route::currentRouteName() == 'backoffice.campeonato.index') active @endif">
-                    <a href="{{ route('backoffice.campeonato.index') }}" class="menu-link">
-                        <i class="menu-icon icon-base ti tabler-settings"></i>
-                        <div>Campeonatos</div>
+                <li class="menu-item @if (Route::currentRouteName() == 'backoffice.desarrollador.index') active @endif">
+                    <a href="{{ route('backoffice.desarrollador.index') }}" class="menu-link">
+                        <i class="menu-icon icon-base ti tabler-code"></i>
+                        <div>Desarrolladores</div>
                     </a>
                 </li>
             </ul>
@@ -200,6 +200,12 @@
             <a href="{{ route('backoffice.equipo-jugador.index') }}" class="menu-link">
                 <i class="menu-icon icon-base ti tabler-settings"></i>
                 <div>Equipos Jugadores</div>
+            </a>
+        </li>
+        <li class="menu-item @if (Route::currentRouteName() == 'backoffice.campeonato.index') active @endif">
+            <a href="{{ route('backoffice.campeonato.index') }}" class="menu-link">
+                <i class="menu-icon icon-base ti tabler-settings"></i>
+                <div>Campeonatos</div>
             </a>
         </li>
     </ul>

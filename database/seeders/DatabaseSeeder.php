@@ -1207,6 +1207,17 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        DB::table('desarrollador')->insert([
+            [
+                'nombre' => 'Sebastián Cabezas',
+                'foto' => 'https://avatars.githubusercontent.com/u/68340396?v=4&size=64',
+                'medios_contacto' => '[{"nombre":"email","url":"sebastian.cabezas@docente.ipss.cl"}]',
+                'rol' => 'Docente a cargo del Desarrollo',
+                'version_software' => '1.0',
+                'descripcion_funcionalidades' => 'Docente especialista en desarrollo de software, especializado en Laravel y resolución de errores de los estudiantes.',
+            ],
+        ]);
+
         $adminUser->assignRole($rolAdmin); // Asignar el rol admin al usuario admin
         $jugadorUser->assignRole($rolJugador); // Asignar el rol cliente al usuario cliente
         $entrenadorUser->assignRole($rolEntrenador); // Asignar el rol entrenador al usuario entrenador
