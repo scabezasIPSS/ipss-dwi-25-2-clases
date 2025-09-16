@@ -1121,8 +1121,6 @@ class DatabaseSeeder extends Seeder
             'mediocontacto-list',
             'piernadominante-list',
             'camisetas-list',
-            'pedido-view',
-            'pedido-cancel'
         ];
 
 
@@ -1159,6 +1157,10 @@ class DatabaseSeeder extends Seeder
             $rolEntrenador->givePermissionTo($permission); // se asignan los permisos al rol entrenador
         }
 
+        // Obtener los cargos creados
+        $cargoEntrenador = DB::table('cargos')->where('nombre', 'Entrenador')->first();
+        $cargoJugador = DB::table('cargos')->where('nombre', 'Jugador')->first();
+
         // Crear usuarios de prueba
         $adminUser = User::firstOrCreate(
             ['rut' => '12345678-9'],
@@ -1168,7 +1170,7 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('holaMundo'),
                 'fechaNacimiento' => '1987-06-08',
                 'generoId' => 2,
-                'cargoId' => 1,
+                'cargoId' => $cargoEntrenador->id, // Admin será entrenador
                 'activo' => true,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -1183,7 +1185,7 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('holaMundo'),
                 'fechaNacimiento' => '1987-06-08',
                 'generoId' => 2,
-                'cargoId' => 1,
+                'cargoId' => $cargoJugador->id, // Jugador
                 'activo' => true,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -1198,7 +1200,7 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('holaMundo'),
                 'fechaNacimiento' => '1987-06-08',
                 'generoId' => 2,
-                'cargoId' => 1,
+                'cargoId' => $cargoEntrenador->id, // Entrenador
                 'activo' => true,
                 'created_at' => now(),
                 'updated_at' => now()

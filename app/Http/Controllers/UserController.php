@@ -4,18 +4,40 @@ namespace App\Http\Controllers;
 
 use App\Models\CargosModel;
 use App\Models\GeneroModel;
-use App\Models\NacionalidadModel;
-use App\Models\PosicionModel;
-use App\Models\User;  // Importar el modelo User
-use Illuminate\Auth\Events\Registered;  // Opcional, si usas el evento Registered
+use App\Models\ComunasModel;
+use App\Models\OficiosModel;
 use Illuminate\Http\Request;
+use App\Models\PosicionModel;
+use App\Models\NacionalidadModel;
+use App\Models\MedioContactoModel;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
+use App\Models\PiernaDominanteModel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
+use App\Models\User;  // Importar el modelo User
 use Illuminate\Support\Facades\Hash;  // Importar la fachada Hash
 use Illuminate\Validation\Rules\Password;  // Importar la clase Password
-use Spatie\Permission\Models\Role;
+use Illuminate\Auth\Events\Registered;  // Opcional, si usas el evento Registered
 
 class UserController extends Controller
 {
+
+    /**
+     * Helper: crea la cookie con el token JWT
+     */
+    protected function makeJwtCookie(string $token)
+    {
+        // TTL en minutos (factory()->getTTL() devuelve minutos)
+        $ttl = auth('api')->factory()->getTTL();
+
+        // secure en producción (ajusta si trabajas en localhost con https false)
+        $secure = config('app.env') === 'production';
+
+        // cookie(name, value, minutes, path, domain, secure, httpOnly, raw, sameSite)
+        return cookie('jwt_token', $token, $ttl, '/', null, $secure, true, false, 'Strict');
+    }
+
     public function showFormRegistro()
     {
         if (Auth::check()) {
@@ -45,10 +67,8 @@ class UserController extends Controller
 
     public function guardarNuevo(Request $request)
     {
-        // 1. revisar los datos que llegan del formulario
-        // dd($request->all());
 
-        // 2. Validación de los datos del formulario
+        // 1. Validación de los datos del formulario
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
@@ -56,25 +76,32 @@ class UserController extends Controller
             'password' => ['required', 'confirmed', Password::defaults()],
         ], $this->messages);
 
-        // 3. Creación del nuevo usuario en la base de datos
+        // 2. Buscar el cargo "Jugador" por defecto
+        $cargoJugador = DB::table('cargos')->where('nombre', 'Jugador')->first();
+
+        // 3. Creación del nuevo usuario en la base de datos con cargo por defecto
         $user = User::create([
             'name' => $request->name,
             'lastname' => $request->lastname,
             'rut' => $request->rut,
+            'cargoId' => $cargoJugador ? $cargoJugador->id : null, // asigna cargo jugador
             'password' => Hash::make($request->password),
         ]);
 
+        // 4. Asignar rol "jugador" por defecto
         $rolJugador = Role::where('name', 'jugador')->first();
-
         if ($rolJugador) {
             $user->assignRole($rolJugador);
         }
 
-        // Opcional: Disparar el evento Registered si necesitas enviar correos de verificación, etc.
-        // event(new Registered($user));
+        // 5. Generar JWT para el usuario creado (sin loguearlo)
+        $token = auth('api')->login($user); // Esto genera un token válido
+        $cookie = $this->makeJwtCookie($token);
 
-        // 4. Redirigir a la página de login con un mensaje de éxito
-        return redirect()->route('/')->with('success', 'Usuario creado, debe iniciar sesión.');
+        // 6. Redirigir al login con mensaje y cookie JWT (el usuario aún no está logueado)
+        return redirect()->route('/') // o la ruta de tu formulario de login
+            ->with('success', 'Usuario creado exitosamente. Ahora puede iniciar sesión.')
+            ->withCookie($cookie);
     }
 
     public function showFormLogin()
@@ -123,7 +150,11 @@ class UserController extends Controller
             $request->session()->regenerate();
             $user = Auth::user();
 
-            return redirect()->route('/')->with('success', "Bienvenido {$user->name}, tiene una sesión iniciada exitosamente.");
+            // Generar JWT para el mismo usuario
+            $token = auth('api')->login($user);
+            $cookie = $this->makeJwtCookie($token);
+
+            return redirect()->route('/')->with('success', "Bienvenido {$user->name}, tiene una sesión iniciada exitosamente.")->withCookie($cookie);
         }
 
         return back()->withErrors([
@@ -136,7 +167,21 @@ class UserController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('/')->with('success', 'Sesión cerrada exitosamente.');
+
+        // Invalidar token JWT guardado en cookie (si existe)
+        $token = $request->cookie('jwt_token');
+        if ($token) {
+            try {
+                auth('api')->setToken($token)->invalidate();
+            } catch (\Exception $e) {
+                // Si falla la invalidación (token expirado u otro), lo ignoramos
+            }
+        }
+
+        // Borrar cookie
+        $forget = Cookie::forget('jwt_token');
+
+        return redirect()->route('/')->with('success', 'Sesión cerrada exitosamente.')->withCookie($forget);
     }
 
     public function showPerfil()
@@ -146,7 +191,7 @@ class UserController extends Controller
             return redirect()->route('/')->withErrors('Error: No tiene una sesión iniciada.');
         }
 
-        $user = Auth::user();
+        $user = Auth::user()->load('cargo'); // Carga la relación
 
         $datos = [
             'textos' => [
@@ -199,8 +244,92 @@ class UserController extends Controller
             'user' => $user
         ];
 
-        return view('backoffice/users/contact', $datos);
+        // Traer datos para selects
+        $generos = GeneroModel::where('activo', 1)->get();
+        $cargos = CargosModel::where('activo', 1)->get();
+        $oficios = OficiosModel::where('activo', 1)->get();
+        $nacionalidades = NacionalidadModel::where('activo', 1)->get();
+        $piernas = PiernaDominanteModel::where('activo', 1)->get();
+        $medios = MedioContactoModel::all();
+        $comunas = ComunasModel::where('activo', 1)->get();
+
+        return view('backoffice/users/contact', [
+            'datos' => $datos,
+            'user' => $user,
+            'generos' => $generos,
+            'cargos' => $cargos,
+            'oficios' => $oficios,
+            'nacionalidades' => $nacionalidades,
+            'piernas' => $piernas,
+            'medios' => $medios,
+            'comunas' => $comunas
+        ]);
     }
+
+    public function updateContacto(Request $request)
+    {
+        $user = auth()->user();
+
+        $request->validate([
+            'nacimiento' => 'nullable|date',
+            'generoId' => 'nullable|exists:genero,id',
+            'oficioId' => 'nullable|exists:oficios,id',
+            'nacionalidadId' => 'nullable|exists:nacionalidad,id',
+            'piernaDominanteId' => 'nullable|exists:pierna_dominante,id',
+            'comunaId' => 'nullable|exists:comunas,id',
+            'medios' => 'array',
+            'medios.*' => 'nullable|string|max:255',
+        ]);
+
+        // Guardar datos básicos
+        $user->fechaNacimiento = $request->has('nacimiento') && $request->nacimiento !== ''
+            ? $request->nacimiento
+            : null; // si borra el campo, queda vacío
+
+        $user->generoId = $request->has('generoId')
+            ? ($request->generoId !== '' ? $request->generoId : null)
+            : $user->generoId;
+
+        $user->oficioId = $request->has('oficioId')
+            ? ($request->oficioId !== '' ? $request->oficioId : null)
+            : $user->oficioId;
+
+        $user->nacionalidadId = $request->has('nacionalidadId')
+            ? ($request->nacionalidadId !== '' ? $request->nacionalidadId : null)
+            : $user->nacionalidadId;
+
+        $user->piernaDominanteId = $request->has('piernaDominanteId')
+            ? ($request->piernaDominanteId !== '' ? $request->piernaDominanteId : null)
+            : $user->piernaDominanteId;
+
+        $user->comunaId = $request->has('comunaId')
+            ? ($request->comunaId !== '' ? $request->comunaId : null)
+            : $user->comunaId;
+
+        $user->save();
+
+        // Guardar medios de contacto
+        if ($request->has('medios')) {
+            foreach ($request->medios as $medioId => $valor) {
+                $visible = isset($request->medios_visible[$medioId]) ? 1 : 0;
+        
+                if ($valor !== null && $valor !== '') {
+                    $user->mediosDeContacto()->syncWithoutDetaching([
+                        $medioId => [
+                            'valor' => $valor,
+                            'visible' => $visible,
+                        ]
+                    ]);
+                } else {
+                    $user->mediosDeContacto()->detach($medioId);
+                }
+            }
+        }
+
+        return redirect()->route('backoffice.user.contact')
+            ->with('success', 'Datos de contacto actualizados correctamente');
+    }
+
 
     public function showSeguridad()
     {
@@ -229,7 +358,10 @@ class UserController extends Controller
             'user' => $user
         ];
 
-        return view('backoffice/users/security', $datos);
+        return view('backoffice/users/security', [
+            'datos' => $datos,
+            'user' => $user
+        ]);
     }
 
     public function cambiarClave(Request $_request)
@@ -262,8 +394,9 @@ class UserController extends Controller
             return redirect()->route('/')->withErrors('Debe iniciar sesión.');
         }
         $user = Auth::user();
-        $lista = User::with('roles', 'permissions')->get();
+        $lista = User::with('roles', 'permissions', 'cargo')->get();
         $roles = Role::all();
+
         $listaGenero = GeneroModel::all()->where('activo', 1);
         $listaCargos = CargosModel::all()->where('activo', 1);
         $listaNacionalidades = NacionalidadModel::all()->where('activo', 1);

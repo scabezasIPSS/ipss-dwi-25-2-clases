@@ -2,23 +2,16 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Spatie\Permission\Traits\HasRoles;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
-use Spatie\Permission\Traits\HasRoles;
-
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasRoles;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'name',
         'lastname',
@@ -27,43 +20,83 @@ class User extends Authenticatable
         'cargoId',
         'generoId',
         'fechaNacimiento',
+        'nacionalidadId',
+        'piernaDominanteId',
+        'oficioId',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    protected $casts = [
+        'fechaNacimiento' => 'date',
+    ];
+
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
 
-    /**
-     * Get the name of the unique identifier for the user.
-     *
-     * @return string
-     */
-    public function rut()
-    {
-        return 'rut';
-    }
+    // Relaciones
 
     public function genero()
-{
-    return $this->belongsTo(GeneroModel::class, 'generoId');
-}
+    {
+        return $this->belongsTo(GeneroModel::class, 'generoId');
+    }
+
+    public function cargo()
+    {
+        return $this->belongsTo(CargosModel::class, 'cargoId');
+    }
+
+    public function oficio()
+    {
+        return $this->belongsTo(OficiosModel::class, 'oficioId');
+    }
+
+    public function nacionalidad()
+    {
+        return $this->belongsTo(NacionalidadModel::class, 'nacionalidadId');
+    }
+
+    public function piernaDominante()
+    {
+        return $this->belongsTo(PiernaDominanteModel::class, 'piernaDominanteId');
+    }
+
+    public function comuna()
+    {
+        return $this->belongsTo(ComunasModel::class, 'comunaId');
+    }
+
+    // Relación muchos a muchos con medios de contacto
+    public function mediosDeContacto()
+    {
+        return $this->belongsToMany(MedioContactoModel::class, 'usuario_contacto', 'user_id', 'medio_contacto_id')
+            ->withPivot('valor', 'visible')
+            ->withTimestamps();
+    }
+
+    public function mediosDeContactoVisibles()
+    {
+        return $this->belongsToMany(MedioContactoModel::class, 'usuario_contacto', 'user_id', 'medio_contacto_id')
+            ->withPivot('valor', 'visible')
+            ->wherePivot('visible', true) // 👈 Solo los visibles
+            ->withTimestamps();
+    }
+
+    // Métodos JWT
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }

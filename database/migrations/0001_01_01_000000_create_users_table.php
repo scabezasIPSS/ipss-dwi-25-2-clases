@@ -17,12 +17,26 @@ return new class extends Migration
             $table->string('name');
             $table->string('lastname');
             $table->string('password')->nullable();
-            $table->string('fechaNacimiento')->nullable();
-            $table->string('generoId')->nullable();
-            $table->string('cargoId')->default(1);
+            $table->date('fechaNacimiento')->nullable();
+        
+            $table->unsignedBigInteger('generoId')->nullable();
+            $table->unsignedBigInteger('cargoId')->nullable();
+            $table->unsignedBigInteger('oficioId')->nullable();
+            $table->unsignedBigInteger('nacionalidadId')->nullable();
+            $table->unsignedBigInteger('piernaDominanteId')->nullable();
+            $table->unsignedBigInteger('comunaId')->nullable();
+        
             $table->rememberToken();
             $table->timestamps();
             $table->boolean('activo')->default(true);
+        
+            // Llaves foráneas
+            $table->foreign('generoId')->references('id')->on('genero')->nullOnDelete();
+            $table->foreign('cargoId')->references('id')->on('cargos')->nullOnDelete();
+            $table->foreign('oficioId')->references('id')->on('oficios')->nullOnDelete();
+            $table->foreign('nacionalidadId')->references('id')->on('nacionalidad')->nullOnDelete();
+            $table->foreign('piernaDominanteId')->references('id')->on('pierna_dominante')->nullOnDelete();
+            $table->foreign('comunaId')->references('id')->on('comunas')->nullOnDelete();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

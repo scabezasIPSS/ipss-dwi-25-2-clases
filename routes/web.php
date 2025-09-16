@@ -224,3 +224,9 @@ Route::post('/backoffice/entrenamiento', [EntrenamientosController::class, 'stor
 Route::post('/backoffice/entrenamiento/down/{_id}', [EntrenamientosController::class, 'down'])->name('backoffice.entrenamiento.down');
 Route::post('/backoffice/entrenamiento/up/{_id}', [EntrenamientosController::class, 'up'])->name('backoffice.entrenamiento.up');
 Route::post('/backoffice/entrenamiento/destroy/{_id}', [EntrenamientosController::class, 'destroy'])->name('backoffice.entrenamiento.destroy');
+
+// Medios de contacto: Hector + Ethan
+
+// Ruta para actualizar datos personales del usuario
+Route::put('/backoffice/user/contact', [UserController::class, 'updateContacto'])
+    ->name('backoffice.user.contact.update');
