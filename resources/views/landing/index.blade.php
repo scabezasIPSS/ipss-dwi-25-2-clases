@@ -476,17 +476,17 @@
 
     <div id="desarrolladores" class="container my-5 anchor-offset">
         <h2 class="text-primary text-center mb-4">Desarrolladores</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="row g-4">
             @if (isset($desarrolladores) && $desarrolladores->count() > 0)
                 @foreach ($desarrolladores as $desarrollador)
-                    <div class="col">
+                    <div class="col-3">
                         <div class="card bg-dark text-white h-100">
                             <img src="{{ $desarrollador->foto }}" class="card-img-top" alt="Foto de desarrollador"
                                 width="100">
                             <div class="card-body text-center">
-                                <h5 class="card-title">{{ $desarrollador->nombre }}</h5>
-                                <p class="card-text">
-                                    <span class="text-primary">{{ $desarrollador->rol }}</span><br>
+                                <h5 class="card-title" style="font-size: 18px">{{ $desarrollador->nombre }}</h5>
+                                <p class="card-text" style="font-size: 8px!important">
+                                    <span class="text-primary" style="font-size: 16px">{{ $desarrollador->rol }}</span><br>
                                     <hr>
                                     Versión del Software: <span class="text-primary">V
                                         {{ $desarrollador->version_software }}</span><br>
@@ -495,12 +495,6 @@
                                     <span
                                         class="text-primary">{{ $desarrollador->descripcion_funcionalidades }}</span>
                                 </p>
-                                <hr>
-                                {{-- @foreach ($desarrollador->medios_contacto as $medio)
-                                    <a href="{{ $medio['url'] }}" target="_blank" class="btn btn-primary mt-2">
-                                        {{ $medio['nombre'] }}
-                                    </a>
-                                @endforeach --}}
                             </div>
                         </div>
                     </div>
