@@ -19,4 +19,6 @@ abstract class Controller
         'roles_nombre.required' => 'El <strong>Nombre</strong> es requerido.',
         'roles_icono.required' => 'El <strong>Icono</strong> es requerido.',
     ];
+
+    public $urlLogo = 'https://www.sonkei.cl/imgs/logo_v2.webp';
 }

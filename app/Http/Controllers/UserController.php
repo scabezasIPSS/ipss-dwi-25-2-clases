@@ -48,7 +48,7 @@ class UserController extends Controller
         $datos = [
             'textos' => [
                 'titulo' => 'Registrar | Sonkei FC',
-                'logo' => '/assets/imgs/logo_sonkei_v2.webp',
+                'logo' => $this->urlLogo,
                 'nombre' => 'Sonkei FC',
                 'formulario' => [
                     'titulo' => 'Registro Sonkei FC ⚽️',
@@ -109,7 +109,7 @@ class UserController extends Controller
         $datos = [
             'textos' => [
                 'titulo' => 'Iniciar Sesión | Sonkei FC',
-                'logo' => '/assets/imgs/logo_sonkei_v2.webp',
+                'logo' => $this->urlLogo,
                 'nombre' => 'Sonkei FC',
                 'formulario' => [
                     'titulo' => 'Bienvenido a Sonkei FC ⚽️',
@@ -196,7 +196,7 @@ class UserController extends Controller
         $datos = [
             'textos' => [
                 'titulo' => 'Mantenedor Usuarios | Sonkei FC',
-                'logo' => '/assets/imgs/logo_sonkei_v2.webp',
+                'logo' => $this->urlLogo,
                 'nombre' => 'Sonkei FC',
                 'formulario' => [
                     'titulo' => 'Registro Sonkei FC ⚽️',
@@ -229,7 +229,7 @@ class UserController extends Controller
         $datos = [
             'textos' => [
                 'titulo' => 'Mantenedor Usuarios | Sonkei FC',
-                'logo' => '/assets/imgs/logo_sonkei_v2.webp',
+                'logo' => $this->urlLogo,
                 'nombre' => 'Sonkei FC',
                 'formulario' => [
                     'titulo' => 'Registro Sonkei FC ⚽️',
@@ -343,7 +343,7 @@ class UserController extends Controller
         $datos = [
             'textos' => [
                 'titulo' => 'Mantenedor Usuarios | Sonkei FC',
-                'logo' => '/assets/imgs/logo_sonkei_v2.webp',
+                'logo' => $this->urlLogo,
                 'nombre' => 'Sonkei FC',
                 'formulario' => [
                     'titulo' => 'Registro Sonkei FC ⚽️',
@@ -405,7 +405,7 @@ class UserController extends Controller
         $datos = [
             'textos' => [
                 'titulo' => 'Usuarios | Sonkei FC',
-                'logo' => '/assets/imgs/logo_sonkei_v2.webp',
+                'logo' => $this->urlLogo,
                 'nombre' => 'Sonkei FC',
                 'formulario' => [
                     'titulo' => 'Bienvenido a Sonkei FC ⚽️',

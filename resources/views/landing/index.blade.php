@@ -275,7 +275,7 @@
                 <ul class="navbar-nav align-items-center">
                     <li class="nav-item">
                         <a class="nav-link" href="/">
-                            <img src="{{ asset('assets/imgs/logo_sonkei_v2.webp') }}" alt="Logo de Sonkei"
+                            <img src="{{ $datos['textos']['logo'] }}" alt="Logo de Sonkei"
                                 class="logo-navbar">
                         </a>
                     </li>

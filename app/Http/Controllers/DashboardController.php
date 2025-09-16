@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $datos = [
             'textos' => [
                 'titulo' => 'Inicio | Sonkei FC',
-                'logo' => '/assets/imgs/logo_sonkei_v2.webp',
+                'logo' => $this->urlLogo,
                 'nombre' => 'Sonkei FC',
             ],
             'dev' => [

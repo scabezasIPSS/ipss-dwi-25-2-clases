@@ -23,7 +23,7 @@ class CamisetasController extends Controller
         $datos = [
             'textos' => [
                 'titulo' => 'Iniciar Sesión | Sonkei FC',
-                'logo' => '/assets/imgs/logo_sonkei_v2.webp',
+                'logo' => $this->urlLogo,
                 'nombre' => 'Sonkei FC',
                 'formulario' => [
                     'titulo' => 'Bienvenido a Sonkei FC ⚽️',

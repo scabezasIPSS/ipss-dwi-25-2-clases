@@ -68,7 +68,7 @@ class CampeonatoController extends Controller
         $datos = [
             'textos' => [
                 'titulo' => 'Campeonatos | Sonkei FC',
-                'logo' => '/assets/imgs/logo_sonkei_v2.webp',
+                'logo' => $this->urlLogo,
                 'nombre' => 'Sonkei FC',
 
             ],
