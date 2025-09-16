@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DesarrolladorController;
 use App\Http\Controllers\DiasSemanaController;
+use App\Http\Controllers\EntrenadoresController;
 use App\Http\Controllers\EntrenamientosController;
 use App\Http\Controllers\EquipoJugadorController;
 use App\Http\Controllers\EquiposController;
@@ -278,10 +279,14 @@ Route::post('/backoffice/tipopartido/destroy/{id}', [TipoPartidoController::clas
 
 // Rutas agregadas para jugadores del mes: Javi, Indira, Paula
 // Rutas para Jugador del Mes (solo lo necesario por ahora)
-Route::get('/backoffice/jugadorDelMes', [JugadorDelMesController::class, 'index'])
-    ->name('backoffice.jugadorDelMes.index');
-Route::post('/backoffice/jugadorDelMes', [JugadorDelMesController::class, 'storeDestacado'])
-    ->name('backoffice.jugadorDelMes.new');
+Route::get('/backoffice/jugadorDelMes', [JugadorDelMesController::class, 'index'])->name('backoffice.jugadorDelMes.index');
+Route::post('/backoffice/jugadorDelMes', [JugadorDelMesController::class, 'storeDestacado'])->name('backoffice.jugadorDelMes.new');
 Route::post('/backoffice/jugadorDelMes/down/{_id}', [JugadorDelMesController::class, 'down'])->name('backoffice.jugadorDelMes.down');
 Route::post('/backoffice/jugadorDelMes/up/{_id}', [JugadorDelMesController::class, 'up'])->name('backoffice.jugadorDelMes.up');
 Route::post('/backoffice/jugadorDelMes/destroy/{_id}', [JugadorDelMesController::class, 'destroy'])->name('backoffice.jugadorDelMes.destroy');
+
+Route::get('/backoffice/entrenadores', [EntrenadoresController::class, 'index'])->name('backoffice.entrenadores.index');
+Route::post('/backoffice/entrenadores', [EntrenadoresController::class, 'store'])->name('backoffice.entrenadores.new');
+Route::post('/backoffice/entrenadores/down/{_id}', [EntrenadoresController::class, 'down'])->name('backoffice.entrenadores.down');
+Route::post('/backoffice/entrenadores/up/{_id}', [EntrenadoresController::class, 'up'])->name('backoffice.entrenadores.up');
+Route::post('/backoffice/entrenadores/destroy/{_id}', [EntrenadoresController::class, 'destroy'])->name('backoffice.entrenadores.destroy');

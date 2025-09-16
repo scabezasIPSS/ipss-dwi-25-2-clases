@@ -24,7 +24,7 @@ class PersonaService
             'edad' => $data['edad'],
             //'correo' => $data['correo'],
             //'comuna_id' => $data['comuna_id'],
-            'oficiosId' => $data['oficiosId'],
+            // 'oficiosId' => $data['oficiosId'],
             //'medio_contacto_id' => $data['medio_contacto_id'],
             //'telefono' => $data['telefono'],
             //'direccion' => $data['direccion'],

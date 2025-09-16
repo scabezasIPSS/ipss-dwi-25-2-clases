@@ -23,14 +23,24 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        //javiera, indira y paula
+        Schema::create('entrenadores', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('personaId')->unique()->constrained('persona')->onDelete('cascade');
+            $table->string('nivel');                    // 'principiante', 'intermedio', 'avanzado'
+            $table->text('certificacion')->nullable();  // JSON encode: array de certificaciones
+            $table->boolean('activo')->default(true);   // Estado activo/desactivado
+            $table->timestamps();                       // created_at y updated_at
+        });
+
         //Partidos: Malcolm, Justin, Miguel
         Schema::create('entrenamientos', function (Blueprint $table) {
             $table->id();
             // Clave foránea a la tabla entrenadores
-            $table->integer('entrenador_id');
-            //$table->foreignId('entrenador_id'); //de javi
-                //->constrained('entrenadores') // asegúrate de que esta tabla exista
-                //->onDelete('restrict');
+            // $table->integer('entrenador_id');
+            $table->foreignId('entrenador_id') //de javi
+                ->constrained('entrenadores') 
+                ->onDelete('restrict');
             $table->foreignId('categoria_id')
                 ->constrained('categoria') // asegúrate de que esta tabla exista
                 ->onDelete('restrict');
@@ -55,7 +65,7 @@ return new class extends Migration
             $table->timestamp('fecha');
             // Estado activo
             $table->boolean('activo')->default(true);
-        
+
             $table->timestamps();
         });
         Schema::create('partidos', function (Blueprint $table) {
@@ -85,7 +95,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('año');
             $table->string('descripcion', 300);
             $table->dateTime('fechaPublicacion');
-            $table->unique(['año','mes']);
+            $table->unique(['año', 'mes']);
             $table->boolean('activo')->default(true);
             $table->timestamps();
         });

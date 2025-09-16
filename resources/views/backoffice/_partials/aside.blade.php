@@ -190,10 +190,16 @@
                 <div>Aside</div>
             </a>
         </li>
-        <li class="menu-item @if (Route::currentRouteName() == 'backoffice.users.index') active @endif">
+        {{-- <li class="menu-item @if (Route::currentRouteName() == 'backoffice.users.index') active @endif">
             <a href="{{ route('backoffice.users.index') }}" class="menu-link">
                 <i class="menu-icon icon-base ti tabler-users"></i>
                 <div>Usuarios</div>
+            </a>
+        </li> --}}
+        <li class="menu-item @if (str_starts_with(Route::currentRouteName(), 'backoffice.entrenadores')) active @endif">
+            <a href="{{ route('backoffice.entrenadores.index') }}" class="menu-link">
+                <i class="menu-icon icon-base ti tabler-user-cog"></i>
+                <div>Entrenadores</div>
             </a>
         </li>
         <li class="menu-item @if (Route::currentRouteName() == 'backoffice.entrenamiento.index') active @endif">
