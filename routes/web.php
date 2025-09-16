@@ -14,6 +14,7 @@ use App\Http\Controllers\DiasSemanaController;
 use App\Http\Controllers\EntrenamientosController;
 use App\Http\Controllers\EquipoJugadorController;
 use App\Http\Controllers\EquiposController;
+use App\Http\Controllers\EstadosPagoController;
 use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\HoraFinController;
 use App\Http\Controllers\HorainicioController;
@@ -253,3 +254,11 @@ Route::post('/backoffice/desarrollador', [DesarrolladorController::class, 'store
 Route::delete('/backoffice/desarrollador/down/{_id}', [DesarrolladorController::class, 'down'])->name('backoffice.desarrollador.down');
 Route::post('/backoffice/desarrollador/up/{_id}', [DesarrolladorController::class, 'up'])->name('backoffice.desarrollador.up');
 Route::delete('/backoffice/desarrollador/destroy/{_id}', [DesarrolladorController::class, 'destroy'])->name('backoffice.desarrollador.destroy');
+
+// Estadopago: Malcolm
+Route::get('/backoffice/estadopago', [EstadosPagoController::class, 'index'])->name('backoffice.estadospago.index');
+Route::post('/backoffice/estadopago/new', [EstadosPagoController::class, 'crearEstado'])->name('backoffice.estadospago.new');
+Route::post('/backoffice/estadopago/new', [EstadosPagoController::class, 'store'])->name('backoffice.estadospago.new');
+Route::post('/backoffice/estadopago/up/{id}', [EstadosPagoController::class, 'up'])->name('backoffice.estadospago.up');
+Route::post('/backoffice/estadopago/down/{id}', [EstadosPagoController::class, 'down'])->name('backoffice.estadospago.down');
+Route::post('/backoffice/estadopago/destroy/{id}', [EstadosPagoController::class, 'destroy'])->name('backoffice.estadospago.destroy');

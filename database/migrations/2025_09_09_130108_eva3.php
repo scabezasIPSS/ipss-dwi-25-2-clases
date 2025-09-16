@@ -109,6 +109,16 @@ return new class extends Migration
             $table->boolean('activo')->default(true);
             $table->timestamps();
         });
+
+        // Estados pago: Malcom
+
+        Schema::create('estadospago', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+            $table->string('color')->default('secondary');
+            $table->boolean('activo')->default(true);
+            $table->timestamps();
+        });
     }
 
     /**

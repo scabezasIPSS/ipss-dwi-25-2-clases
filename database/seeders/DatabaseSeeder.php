@@ -942,6 +942,31 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
+        //Estados pagos: Malcolm
+        DB::table('estadospago')->insert([
+            [
+                'nombre' => 'Pagado',
+                'color' => 'success',
+                'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'nombre' => 'Pendiente',
+                'color' => 'warning',
+                'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'nombre' => 'Moroso',
+                'color' => 'danger',
+                'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+        ]);
+
         $rolAdmin = Role::firstOrCreate(['name' => 'admin']);
         $rolJugador = Role::firstOrCreate(['name' => 'jugador']);
         $rolEntrenador = Role::firstOrCreate(['name' => 'entrenador']);
