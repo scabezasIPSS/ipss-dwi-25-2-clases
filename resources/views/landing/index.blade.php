@@ -550,8 +550,8 @@
             <hr class="mt-4 mb-3 text-secondary">
 
             <div class="text-center text-muted">
-                <p>&copy; 2023–2024 | Todos los derechos reservados | Desarrollado por <a href="https://contingeni.cl/"
-                        target="_blank" class="text-decoration-none text-primary">contingeni.cl</a></p>
+                <p>&copy; 2025 | Todos los derechos reservados | Desarrollado por <a href="https://coningenio.cl/"
+                        target="_blank" class="text-decoration-none text-primary">coningenio.cl</a></p>
             </div>
         </div>
     </footer>
