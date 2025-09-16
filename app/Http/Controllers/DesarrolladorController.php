@@ -110,40 +110,40 @@ class DesarrolladorController extends Controller
                         ]
                     ],
                     // Medios de Contacto
-                    [
-                        'label' => 'Medios de Contacto',
-                        'name' => 'medios_contacto',
-                        'required' => true,
-                        'control' => [
-                            'element' => 'input',
-                            'type' => 'text',
-                            'classList' => [
-                                'form-control',
-                                'mb-4'
-                            ],
-                            'min' => 3,
-                            'max' => 100,
-                            'placeholder' => 'Ingrese un nombre'
-                        ],
-                        'access' => [
-                            'editableIn' => [
-                                'new' => true,
-                                'edit' => true,
-                                'show' => false,
-                                'up' => false,
-                                'down' => false,
-                                'delete' => false
-                            ],
-                            'readIn' => [
-                                'new' => true,
-                                'edit' => true,
-                                'show' => true,
-                                'up' => true,
-                                'down' => true,
-                                'delete' => true
-                            ]
-                        ]
-                    ],
+                    // [
+                    //     'label' => 'Medios de Contacto',
+                    //     'name' => 'medios_contacto',
+                    //     'required' => true,
+                    //     'control' => [
+                    //         'element' => 'input',
+                    //         'type' => 'text',
+                    //         'classList' => [
+                    //             'form-control',
+                    //             'mb-4'
+                    //         ],
+                    //         'min' => 3,
+                    //         'max' => 100,
+                    //         'placeholder' => '[{"nombre":"email","url":"mailto:sebastian.cabezas@docente.ipss.cl"},{"nombre":"GitHub","url":"https://www.github.com/scabezas-ipss"}]'
+                    //     ],
+                    //     'access' => [
+                    //         'editableIn' => [
+                    //             'new' => true,
+                    //             'edit' => true,
+                    //             'show' => false,
+                    //             'up' => false,
+                    //             'down' => false,
+                    //             'delete' => false
+                    //         ],
+                    //         'readIn' => [
+                    //             'new' => true,
+                    //             'edit' => true,
+                    //             'show' => true,
+                    //             'up' => true,
+                    //             'down' => true,
+                    //             'delete' => true
+                    //         ]
+                    //     ]
+                    // ],
                     // Rol
                     [
                         'label' => 'Rol',
@@ -276,7 +276,7 @@ class DesarrolladorController extends Controller
         $request->validate([
             'nombre' => ['required', 'string', 'max:50', 'min:3'],
             'foto' => ['required', 'url'],
-            'medios_contacto' => ['required', 'string', 'min:3'],
+            // 'medios_contacto' => ['required', 'string', 'min:3'],
             'rol' => ['required', 'string', 'max:100', 'min:3'],
             'version_software' => ['required', 'string', 'max:50', 'min:3'],
             'descripcion_funcionalidades' => ['required', 'string', 'min:3'],

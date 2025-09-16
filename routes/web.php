@@ -18,6 +18,7 @@ use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\HoraFinController;
 use App\Http\Controllers\HorainicioController;
 use App\Http\Controllers\JugadoresController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\MedioContactoController;
 use App\Http\Controllers\MediosPagosController;
 use App\Http\Controllers\NacionalidadController;
@@ -34,9 +35,7 @@ use Spatie\Permission\Middleware\PermissionMiddleware;
 Route::aliasMiddleware('role', RoleMiddleware::class);
 Route::aliasMiddleware('permission', PermissionMiddleware::class);
 
-Route::get('/', function () {
-    return view('landing/index');
-})->name('/');
+Route::get('/', [LandingPageController::class, 'index'])->name('/');
 
 Route::get('/backoffice', [DashboardController::class, 'index'])->name('backoffice.dashboard');
 

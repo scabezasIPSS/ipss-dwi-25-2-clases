@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('foto');
-            $table->string('medios_contacto');
+            // $table->string('medios_contacto');
             $table->string('rol');
             $table->string('version_software');
             $table->text('descripcion_funcionalidades');
+            $table->boolean('activo')->default(true);
             $table->timestamps();
         });
     }

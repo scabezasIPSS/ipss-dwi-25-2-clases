@@ -2,6 +2,9 @@
     <thead>
         <tr>
             <th>ID</th>
+            @if (isset($datos['mantenedor']['has_roles']) && $datos['mantenedor']['has_roles'])
+                <th>Roles</th>
+            @endif
             @if ($datos['mantenedor']['fields'][0]['label'] == 'Abreviatura')
                 <th>Abreviatura</th>
             @endif
@@ -54,6 +57,17 @@
             @foreach ($lista as $item)
                 <tr>
                     <td class="text-center">{{ $item->id }}</td>
+                    @if (isset($datos['mantenedor']['has_roles']) && $datos['mantenedor']['has_roles'])
+                        <td class="text-center">
+                            @if ($item->roles->count() > 0)
+                                @foreach ($item->roles as $role)
+                                    <span class="badge bg-primary">{{ ucfirst($role->name) }}</span>
+                                @endforeach
+                            @else
+                                <span class="text-muted">Sin rol</span>
+                            @endif
+                        </td>
+                    @endif
                     @if ($item->abreviatura)
                         <td class="text-center">{{ $item->abreviatura }}</td>
                     @endif

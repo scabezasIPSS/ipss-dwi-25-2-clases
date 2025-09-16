@@ -7,7 +7,7 @@
             <th>Foto</th>
             <th>Nombre</th>
             <th>Rol</th>
-            <th>Medios de Contacto</th>
+            {{-- <th>Medios de Contacto</th> --}}
             <th>Versión de Software</th>
             <th>Descripción</th>
             <th>Acciones</th>
@@ -20,11 +20,18 @@
                 <td class="text-center"><img src="{{ $desarrollador_item->foto }}" alt="Foto" width="50"></td>
                 <td class="text-center">{{ $desarrollador_item->nombre ?? 'N/A' }}</td>
                 <td class="text-center">{{ $desarrollador_item->rol }}</td>
-                <td class="text-center">{{ $desarrollador_item->medios_contacto }}</td>
+                {{-- <td class="text-center">
+                    @foreach ($desarrollador_item->medios_contacto as $medio)
+                        <a href="{{ $medio['url'] }}" target="_blank" class="mt-2">
+                            {{ $medio['nombre'] }} [{{ $medio['url'] }}]
+                        </a>
+                    @endforeach
+                </td> --}}
                 <td class="text-center">{{ $desarrollador_item->version_software }}</td>
                 <td class="text-center">{{ $desarrollador_item->descripcion_funcionalidades ?? 'N/A' }}</td>
                 <td class="text-center">
-                    <form action="{{ route($datos['mantenedor']['routes']['down'], $desarrollador_item) }}" method="POST">
+                    <form action="{{ route($datos['mantenedor']['routes']['down'], $desarrollador_item) }}"
+                        method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>

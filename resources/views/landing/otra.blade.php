@@ -7,6 +7,7 @@
     <title>Landing</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    {{-- <link href="{{ asset('css/sonkei_styles.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         /* Definir variables de color para un uso fácil */
@@ -77,9 +78,9 @@
 
         /* Estilo para botones más grandes y personalizados */
         .btn-sonkei-large {
-            padding: 10px 15px;
+            padding: 15px 20px;
             /* Aumenta el relleno */
-            font-size: 1rem;
+            font-size: 1.25rem;
             /* Hace la fuente más grande */
             font-weight: bold;
             /* Le da más grosor a la fuente */
@@ -133,7 +134,7 @@
 
         /* Estilo para el logo en la navbar */
         .logo-navbar {
-            height: 70px;
+            height: 100px;
             width: auto;
             /* Mantiene la proporción de la imagen */
         }
@@ -245,20 +246,20 @@
 
         /* Define un margen grande para las secciones principales */
         .seccion-espaciada {
-            margin-top: 4rem;
-            margin-bottom: 4rem;
+            margin-top: 8rem;
+            margin-bottom: 8rem;
         }
 
         /* Puedes definir un margen más pequeño para las líneas divisoras */
         hr.seccion-divisora {
-            margin-top: 3rem;
-            margin-bottom: 3rem;
+            margin-top: 5rem;
+            margin-bottom: 5rem;
         }
 
         /* O un estilo específico para el carrusel */
         #carouselExampleCaptions {
-            margin-top: 3rem;
-            margin-bottom: 3rem;
+            margin-top: 8rem;
+            margin-bottom: 8rem;
         }
     </style>
 </head>
@@ -266,19 +267,16 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container-fluid d-flex justify-content-center">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="{{ asset('assets/imgs/logo_sonkei_v2.webp') }}" alt="Logo de Sonkei" class="logo-navbar">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                <ul class="navbar-nav align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">
-                            <img src="{{ asset('assets/imgs/logo_sonkei_v2.webp') }}" alt="Logo de Sonkei"
-                                class="logo-navbar">
-                        </a>
-                    </li>
+                <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="#jugador-del-mes">Jugador del Mes</a>
                     </li>
@@ -298,29 +296,6 @@
                         <a class="nav-link" href="#desarrolladores">Desarrolladores</a>
                     </li>
                 </ul>
-
-                {{-- Botones de sesión --}}
-                @guest
-                    <div class="d-flex align-items-center">
-                        <a href="{{ route('user.form.show.login') }}" class="btn btn-primary me-2">
-                            Iniciar Sesión
-                        </a>
-
-                    </div>
-                @endguest
-                @auth
-                    <div class="d-flex align-items-center">
-                        <a href="{{ route('backoffice.dashboard') }}" class="btn btn-primary me-2">
-                            Dashboard
-                        </a>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="btn btn-danger">
-                                Cerrar Sesión
-                            </button>
-                        </form>
-                    </div>
-                @endauth
             </div>
         </div>
     </nav>
@@ -332,14 +307,32 @@
             buscan superarse y disfrutar del deporte rey en su máxima expresión. ¡Descubre nuestra historia y sé parte
             de ella!</p>
         @include('backoffice/_partials/messages')
-
+        @guest
+            <a href="{{ route('user.form.show.login') }}" class="me-2">
+                <button class="btn btn-primary btn-sonkei-large">Iniciar Sesión</button>
+            </a>
+            <a href="{{ route('user.form.show.registro') }}">
+                <button class="btn btn-primary btn-sonkei-large">Crear Usuario</button>
+            </a>
+        @endguest
         @auth
             <div class="card bg-dark text-white p-4 shadow-sm">
                 <div class="card-body text-center">
                     <h5 class="card-title text-primary">¡Hola, {{ Auth::user()->name }}!</h5>
                     <p class="card-text">Bienvenido de vuelta a tu espacio.</p>
 
-
+                    <div class="d-flex justify-content-center flex-column flex-md-row mt-4">
+                        <a href="{{ route('backoffice.dashboard') }}"
+                            class="btn btn-primary btn-sonkei-large me-md-2 mb-2 mb-md-0">
+                            Dashboard
+                        </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sonkei-large">
+                                Cerrar Sesión
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         @endauth
@@ -538,7 +531,8 @@
 
                 <div class="col-md-4 mb-4">
                     <p class="text-white fw-bold mb-2">
-                        <img src="{{ asset('assets/imgs/logo_sonkei_v2.webp') }}" alt="Logo" class="logo-footer">
+                        <img src="{{ asset('assets/imgs/logo_sonkei_v2.webp') }}" alt="Logo"
+                            class="logo-footer">
                         <span class="ms-2">El respeto en el sentido de tratar a todos por igual sin importar su
                             procedencia, religión, sexo, color de piel o estatus social...</span>
                     </p>
@@ -575,8 +569,8 @@
             <hr class="mt-4 mb-3 text-secondary">
 
             <div class="text-center text-muted">
-                <p>&copy; 2023–2024 | Todos los derechos reservados | Desarrollado por <a href="https://contingeni.cl/"
-                        target="_blank" class="text-decoration-none text-primary">contingeni.cl</a></p>
+                <p>&copy; 2025 | Todos los derechos reservados | Desarrollado por <a href="https://coningenio.cl/"
+                        target="_blank" class="text-decoration-none text-primary">coningenio.cl</a></p>
             </div>
         </div>
     </footer>

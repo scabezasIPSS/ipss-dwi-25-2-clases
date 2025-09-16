@@ -14,9 +14,13 @@ class DesarrolladorModel extends Model
     protected $fillable = [
         'nombre',
         'foto',
-        'medios_contacto',
+        // 'medios_contacto',
         'rol',
         'version_software',
         'descripcion_funcionalidades',
     ];
+
+    // protected $casts = [
+    //     'medios_contacto' => 'array',
+    // ];
 }

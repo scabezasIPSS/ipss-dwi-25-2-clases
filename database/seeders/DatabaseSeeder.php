@@ -1211,7 +1211,7 @@ class DatabaseSeeder extends Seeder
             [
                 'nombre' => 'Sebastián Cabezas',
                 'foto' => 'https://avatars.githubusercontent.com/u/68340396?v=4&size=64',
-                'medios_contacto' => '[{"nombre":"email","url":"sebastian.cabezas@docente.ipss.cl"}]',
+                // 'medios_contacto' => '[{"nombre":"email","url":"mailto:sebastian.cabezas@docente.ipss.cl"},{"nombre":"GitHub","url":"https://www.github.com/scabezas-ipss"}]',
                 'rol' => 'Docente a cargo del Desarrollo',
                 'version_software' => '1.0',
                 'descripcion_funcionalidades' => 'Docente especialista en desarrollo de software, especializado en Laravel y resolución de errores de los estudiantes.',

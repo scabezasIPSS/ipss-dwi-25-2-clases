@@ -19,7 +19,7 @@ class HorainicioController extends Controller
 
         $user = Auth::user();
 
-        $lista = HorainicioModel::all();
+        $lista = HorainicioModel::all()->where('activo',1);
 
         $datos = [
             'textos' => [
