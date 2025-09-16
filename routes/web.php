@@ -11,6 +11,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiasSemanaController;
 use App\Http\Controllers\EntrenamientosController;
+use App\Http\Controllers\EquipoJugadorController;
+use App\Http\Controllers\EquiposController;
 use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\HoraFinController;
 use App\Http\Controllers\HorainicioController;
@@ -230,3 +232,17 @@ Route::post('/backoffice/entrenamiento/destroy/{_id}', [EntrenamientosController
 // Ruta para actualizar datos personales del usuario
 Route::put('/backoffice/user/contact', [UserController::class, 'updateContacto'])
     ->name('backoffice.user.contact.update');
+
+// Equipos: Luciano, JP y Gerald
+
+Route::get('/backoffice/equipos', [EquiposController::class, 'index'])->name('backoffice.equipos.index');
+Route::post('/backoffice/equipos', [EquiposController::class, 'store'])->name('backoffice.equipos.new');
+Route::post('/backoffice/equipos/down/{_id}', [EquiposController::class, 'down'])->name('backoffice.equipos.down');
+Route::post('/backoffice/equipos/up/{_id}', [EquiposController::class, 'up'])->name('backoffice.equipos.up');
+Route::post('/backoffice/equipos/destroy/{_id}', [EquiposController::class, 'destroy'])->name('backoffice.equipos.destroy');
+
+Route::get('/backoffice/equipo-jugador', [EquipoJugadorController::class, 'index'])->name('backoffice.equipo-jugador.index');
+Route::post('/backoffice/equipo-jugador', [EquipoJugadorController::class, 'store'])->name('backoffice.equipo-jugador.new');
+Route::post('/backoffice/equipo-jugador/down/{_id}', [EquipoJugadorController::class, 'down'])->name('backoffice.equipo-jugador.down');
+Route::post('/backoffice/equipo-jugador/up/{_id}', [EquipoJugadorController::class, 'up'])->name('backoffice.equipo-jugador.up');
+Route::post('/backoffice/equipo-jugador/destroy/{_id}', [EquipoJugadorController::class, 'destroy'])->name('backoffice.equipo-jugador.destroy');

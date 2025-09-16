@@ -81,10 +81,31 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        // Equipos, equipos-jugadores: Luciano, JP, Gerald
 
-        Schema::create('equipo', function (Blueprint $table) {
+        Schema::create('equipos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('nombre')->unique();
+            $table->string('apodo')->nullable();
+            $table->date('fundacion')->nullable();
+            $table->integer('trofeos')->nullable();
+            $table->string('presidente')->nullable();
+            $table->string('colores')->nullable();
+            $table->boolean('activo')->default(true);
+            
+            // Columna para la clave foránea
+            $table->unsignedBigInteger('recintoID')->nullable();
+
+            $table->timestamps();
+
+            // Clave foránea que referencia a la tabla `recintos`
+            $table->foreign('recintoID')->references('id')->on('recintos')->onDelete('set null');
+        });
+
+        Schema::create('equipo_jugador', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('equipo_id')->constrained()->onDelete('cascade');
+            $table->foreignId('jugador_id')->constrained('jugadores')->onDelete('cascade');
             $table->boolean('activo')->default(true);
             $table->timestamps();
         });

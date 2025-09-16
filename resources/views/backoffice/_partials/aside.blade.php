@@ -150,7 +150,7 @@
             </ul>
         </li>
         {{-- ojo, aca también debe tener el active y open --}}
-        
+
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ti tabler-smart-home"></i>
@@ -188,6 +188,18 @@
             <a href="{{ route('backoffice.jugadores.index') }}" class="menu-link">
                 <i class="menu-icon icon-base ti tabler-users"></i>
                 <div>Jugadores</div>
+            </a>
+        </li>
+        <li class="menu-item @if (Route::currentRouteName() == 'backoffice.equipos.index') active @endif">
+            <a href="{{ route('backoffice.equipos.index') }}" class="menu-link">
+                <i class="menu-icon icon-base ti tabler-settings"></i>
+                <div>Equipos</div>
+            </a>
+        </li>
+        <li class="menu-item @if (Route::currentRouteName() == 'backoffice.equipo-jugador.index') active @endif">
+            <a href="{{ route('backoffice.equipo-jugador.index') }}" class="menu-link">
+                <i class="menu-icon icon-base ti tabler-settings"></i>
+                <div>Equipos Jugadores</div>
             </a>
         </li>
     </ul>
