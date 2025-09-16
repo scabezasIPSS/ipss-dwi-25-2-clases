@@ -1287,7 +1287,7 @@ class DatabaseSeeder extends Seeder
         DB::table('desarrollador')->insert([
             [
                 'nombre' => 'Sebastián Cabezas',
-                'foto' => 'https://avatars.githubusercontent.com/u/68340396?v=4&size=64',
+                'foto' => 'https://www.sonkei.cl/imgs/team/ipss-v1/hectorGonzalez.webp',
                 // 'medios_contacto' => '[{"nombre":"email","url":"mailto:sebastian.cabezas@docente.ipss.cl"},{"nombre":"GitHub","url":"https://www.github.com/scabezas-ipss"}]',
                 'rol' => 'Docente a cargo del Desarrollo',
                 'version_software' => '1.0',
