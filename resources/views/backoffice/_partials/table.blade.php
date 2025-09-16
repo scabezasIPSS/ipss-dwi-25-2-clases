@@ -2,6 +2,14 @@
     <thead>
         <tr>
             <th>ID</th>
+            <th>
+                @foreach ($datos['mantenedor']['fields'] as $campos)
+                    {{ $campos['label'] ?? 'Nombre' }}
+                @endforeach
+            </th>
+            @if (isset($datos['mantenedor']['nombre']))
+                <th>Nombre</th>
+            @endif
             @if (isset($datos['mantenedor']['has_roles']) && $datos['mantenedor']['has_roles'])
                 <th>Roles</th>
             @endif
@@ -39,11 +47,9 @@
             @if (isset($datos['mantenedor']['has_hora_inicio']) && $datos['mantenedor']['has_hora_inicio'])
                 <th>Hora Inicio</th>
             @endif
-
             @if (isset($datos['mantenedor']['has_hora_fin']) && $datos['mantenedor']['has_hora_fin'])
                 <th>Hora Fin</th>
             @endif
-            
             <th>Estado</th>
             <th>Acciones</th>
         </tr>
@@ -57,6 +63,9 @@
             @foreach ($lista as $item)
                 <tr>
                     <td class="text-center">{{ $item->id }}</td>
+                    @if (isset($item->nombre))
+                        <td>{{ $item->nombre }}</td>
+                    @endif
                     @if (isset($datos['mantenedor']['has_roles']) && $datos['mantenedor']['has_roles'])
                         <td class="text-center">
                             @if ($item->roles->count() > 0)
@@ -117,17 +126,21 @@
                         ver
                         actualizar
                         @if ($item->activo == 1)
-                            <form action="{{ route($datos['mantenedor']['routes']['down'], $item->id) }}" method="POST" class="d-inline-block">
+                            <form action="{{ route($datos['mantenedor']['routes']['down'], $item->id) }}"
+                                method="POST" class="d-inline-block">
                                 @csrf
-                                <button type="submit" class="btn btn-danger" onclick="this.disabled=true; this.innerHTML='<i class=\'icon-base ti tabler-loader\'></i> Procesando...'; setTimeout(() => this.form.submit(), 500);">
+                                <button type="submit" class="btn btn-danger"
+                                    onclick="this.disabled=true; this.innerHTML='<i class=\'icon-base ti tabler-loader\'></i> Procesando...'; setTimeout(() => this.form.submit(), 500);">
                                     <i class="icon-base ti tabler-arrow-down"></i>
                                 </button>
                             </form>
                         @endif
                         @if ($item->activo == 0)
-                            <form action="{{ route($datos['mantenedor']['routes']['up'], $item->id) }}" method="POST" class="d-inline-block">
+                            <form action="{{ route($datos['mantenedor']['routes']['up'], $item->id) }}" method="POST"
+                                class="d-inline-block">
                                 @csrf
-                                <button type="submit" class="btn btn-primary" onclick="this.disabled=true; this.innerHTML='<i class=\'icon-base ti tabler-loader\'></i> Procesando...'; setTimeout(() => this.form.submit(), 500);">
+                                <button type="submit" class="btn btn-primary"
+                                    onclick="this.disabled=true; this.innerHTML='<i class=\'icon-base ti tabler-loader\'></i> Procesando...'; setTimeout(() => this.form.submit(), 500);">
                                     <i class="icon-base ti tabler-arrow-up"></i>
                                 </button>
                             </form>
