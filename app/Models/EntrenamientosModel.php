@@ -19,6 +19,7 @@ class EntrenamientosModel extends Model
         'hora_inicio_id',
         'hora_fin_id',
         'estado_id',
+        'fecha',
         'activo',
     ];
 
@@ -42,6 +43,12 @@ class EntrenamientosModel extends Model
     {
         return $this->belongsTo(HoraFinModel::class, 'hora_fin_id');
     }
+
+    public function getFechaAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('d-m-Y');
+    }
+    
     public function estado()
     {
         return $this->belongsTo(EstadosEntrenamientoModel::class, 'estado_id');

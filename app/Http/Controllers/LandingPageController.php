@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DesarrolladorModel;
+use App\Models\EntrenamientosModel;
 use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
@@ -21,9 +22,12 @@ class LandingPageController extends Controller
             ]
         ];
 
+        $listaEntrenamientos = EntrenamientosModel::all()->where('activo',1);
+;
         $listaDesarrolladores = DesarrolladorModel::all()->where('activo', 1);
         return view('landing/index', [
             'datos' => $datos,
+            'entrenamientos' => $listaEntrenamientos,
             'desarrolladores' => $listaDesarrolladores
         ]);
     }

@@ -52,6 +52,7 @@ return new class extends Migration
             $table->foreignId('estado_id')
                 ->constrained('estadosentrenamiento')
                 ->onDelete('restrict');
+            $table->timestamp('fecha');
             // Estado activo
             $table->boolean('activo')->default(true);
         

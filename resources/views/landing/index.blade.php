@@ -288,12 +288,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#plantel">Plantel</a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="#proximos-partidos">Próximos Partidos</a>
-                    </li>
-                    <li class="nav-item">
+                    </li> --}}
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="#historico-partidos">Histórico</a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link" href="#desarrolladores">Desarrolladores</a>
                     </li>
@@ -413,7 +413,24 @@
         <h2 class="text-primary text-center mb-4">Próximos Entrenamientos</h2>
         <div class="card bg-dark text-white p-3">
             <div class="card-body">
-                <p class="card-text">Aquí irá el contenido de los próximos entrenamientos.</p>
+                <table class="card-text table table-hover">
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Lugar</th>
+                        <th>Hora</th>
+                        <th>Categoría</th>
+                        <th>Estado</th>
+                    </tr>
+                    @foreach ($entrenamientos as $item)
+                        <tr>
+                            <td>{{ $item->fecha }}</td>
+                            <td>{{ $item->recinto->nombre }}</td>
+                            <td>{{ $item->hora_inicio->nombre }} a {{ $item->hora_fin->nombre }}</td>
+                            <td>{{ $item->categoria->nombre }}</td>
+                            <td>{{ $item->estado->nombre }}</td>
+                        </tr>
+                    @endforeach
+                </table>
             </div>
         </div>
     </div>
@@ -443,7 +460,7 @@
 
     <hr class="my-5">
 
-    <div id="proximos-partidos" class="container my-5 anchor-offset">
+    {{-- <div id="proximos-partidos" class="container my-5 anchor-offset">
         <h2 class="text-primary text-center mb-4">Próximos Partidos</h2>
         <div class="card bg-dark text-white p-3">
             <div class="card-body">
@@ -460,9 +477,9 @@
         </div>
     </div>
 
-    <hr class="my-5">
+    <hr class="my-5"> --}}
 
-    <div id="historico-partidos" class="container my-5 anchor-offset">
+    {{-- <div id="historico-partidos" class="container my-5 anchor-offset">
         <h2 class="text-primary text-center mb-4">Histórico de Partidos</h2>
         <div class="card bg-dark text-white p-3">
             <div class="card-body">
@@ -470,10 +487,10 @@
                 </p>
             </div>
         </div>
-    </div>
+    </div> 
 
     <hr class="my-5">
-
+    --}}
     <div id="desarrolladores" class="container my-5 anchor-offset">
         <h2 class="text-primary text-center mb-4">Desarrolladores</h2>
         <div class="row g-4">

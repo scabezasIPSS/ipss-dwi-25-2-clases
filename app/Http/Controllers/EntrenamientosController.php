@@ -9,6 +9,7 @@ use App\Models\DiasSemanaModel;
 use App\Models\HorainicioModel;
 use App\Models\HoraFinModel;
 use App\Models\EstadosEntrenamientoModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -386,6 +387,10 @@ class EntrenamientosController extends Controller
         $cantidadSemanas = (int) $request->semanas;
 
         for ($i = 1; $i <= $cantidadSemanas; $i++) {
+
+            $fecha = Carbon::parse($request->fecha_inicio);
+            $fecha->addDays(7 * $i);
+
             $nuevo = EntrenamientosModel::create([
                 'entrenador_id' => $request->entrenador_id,
                 'categoria_id' => $request->categoria_id,
@@ -393,6 +398,7 @@ class EntrenamientosController extends Controller
                 'dia_id' => $request->dia_id,
                 'hora_inicio_id' => $request->hora_inicio_id,
                 'hora_fin_id' => $request->hora_fin_id,
+                'fecha' => $fecha,
                 'estado_id' => $request->estado_id,
                 'activo' => 1,
             ]);
