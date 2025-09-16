@@ -1,0 +1,251 @@
+/* Definir variables de color para un uso fácil */
+:root {
+    --sonkei-black: #111111;
+    --sonkei-yellow: #FFD700;
+    --sonkei-gray: #BBBBBB;
+    --sonkei-dark-gray: #444444;
+}
+
+/* Aplicar el fondo y el color de texto a todo el cuerpo de la página */
+body {
+    background-color: var(--sonkei-black);
+    color: var(--sonkei-gray);
+}
+
+body {
+    background-color: var(--sonkei-black);
+    color: var(--sonkei-gray);
+    margin: 0;
+    padding: 0;
+}
+
+/* Sobrescribir el estilo de los encabezados para que tengan el color gris */
+h1,
+h3 {
+    color: var(--sonkei-gray);
+}
+
+h1 {
+    font-size: 4.5rem;
+    /* El valor `rem` es una unidad relativa al tamaño de fuente base */
+    margin-bottom: 4rem;
+}
+
+/* Cambiar el color del texto que usa la clase de Bootstrap "text-primary" */
+.text-primary {
+    color: var(--sonkei-yellow) !important;
+}
+
+
+.card-title {
+    font-size: 1.75rem;
+    /* O el valor que prefieras */
+}
+
+.card-text {
+    font-size: 1.2rem;
+    /* O el valor que prefieras */
+}
+
+/* Ajustar el botón principal de Bootstrap para que use el color amarillo */
+.btn-primary {
+    background-color: var(--sonkei-yellow);
+    border-color: var(--sonkei-yellow);
+    color: var(--sonkei-black);
+    /* Cambiar el color del texto del botón a negro para que resalte */
+}
+
+/* Estilo para los botones principales al pasar el mouse por encima (hover) */
+.btn-primary:hover {
+    background-color: #e6c200;
+    /* Un amarillo ligeramente más oscuro */
+    border-color: #e6c200;
+}
+
+
+
+/* Estilo para botones más grandes y personalizados */
+.btn-sonkei-large {
+    padding: 15px 20px;
+    /* Aumenta el relleno */
+    font-size: 1.25rem;
+    /* Hace la fuente más grande */
+    font-weight: bold;
+    /* Le da más grosor a la fuente */
+    border-radius: 50px;
+    /* Le da bordes más redondeados */
+    transition: transform 0.2s ease-in-out;
+    /* Animación al pasar el mouse */
+}
+
+.btn-sonkei-large:hover {
+    transform: scale(1.05);
+    /* Escala el botón para un efecto de "zoom" */
+}
+
+/* Ajustar el botón de peligro de Bootstrap (cerrar sesión) para que encaje con la paleta de colores */
+.btn-danger {
+    background-color: #dc3545;
+    /* Rojo de Bootstrap */
+    border-color: #dc3545;
+    color: #ffffff;
+    /* Texto blanco para que contraste */
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    /* Un rojo un poco más oscuro al pasar el mouse */
+    border-color: #bd2130;
+}
+
+
+/* Nuevo estilo para la barra de navegación */
+.navbar-brand {
+    font-size: 1.5rem;
+    /* Tamaño más grande para el logo */
+    font-weight: bold;
+}
+
+.nav-link {
+    color: var(--sonkei-gray);
+    /* Color de texto predeterminado para los enlaces */
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--sonkei-yellow);
+    /* Cambia a amarillo al pasar el mouse */
+}
+
+/* Estilo para el logo en la navbar */
+.logo-navbar {
+    height: 100px;
+    width: auto;
+    /* Mantiene la proporción de la imagen */
+}
+
+
+/* Ajuste para que la navbar no cubra el contenido al hacer clic en los enlaces */
+.anchor-offset {
+    scroll-margin-top: 200px;
+}
+
+
+/* Estilo para el párrafo de la landing page */
+.landing-paragraph {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    color: var(--sonkei-gray);
+    margin-bottom: 4rem;
+}
+
+
+.landing-image {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: cover;
+    display: block;
+}
+
+
+/* Estilo para el logo en el footer */
+.logo-footer {
+    height: 80px;
+    width: auto;
+}
+
+
+/* Estilo para el contenedor de la imagen del balón */
+.footer .row {
+    align-items: stretch;
+}
+
+/* Estilo para la imagen del balón */
+.footer-ball-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+}
+
+
+
+/* Ajustes para pantallas pequeñas (móviles) */
+@media (max-width: 767.98px) {
+    .logo-navbar {
+        height: 60px;
+        /* Reducir el tamaño del logo en móviles */
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        /* Reducir el tamaño del h1 en móviles */
+    }
+
+    .landing-paragraph {
+        font-size: 1rem;
+        /* Reducir el tamaño de la fuente en móviles */
+    }
+}
+
+
+/* Estilo para los captions (títulos y texto) del carrusel */
+.carousel-caption {
+    background-color: rgba(17, 17, 17, 0.7);
+    border-radius: 10px;
+    padding: 1rem;
+    bottom: 20%;
+    color: var(--sonkei-yellow);
+}
+
+.carousel-caption h5 {
+    color: var(--sonkei-yellow);
+}
+
+/* Ajuste para los iconos de navegación (flechas) */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1);
+    /* Invertir los colores para que se vean blancos */
+}
+
+
+#carouselExampleCaptions {
+    max-width: 900px;
+    max-height: 500px;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.carousel-inner img {
+    height: 500px;
+    object-fit: contain;
+}
+
+
+
+/* Define un margen grande para las secciones principales */
+.seccion-espaciada {
+    margin-top: 8rem;
+    margin-bottom: 8rem;
+}
+
+/* Puedes definir un margen más pequeño para las líneas divisoras */
+hr.seccion-divisora {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+/* O un estilo específico para el carrusel */
+#carouselExampleCaptions {
+    margin-top: 8rem;
+    margin-bottom: 8rem;
+}
