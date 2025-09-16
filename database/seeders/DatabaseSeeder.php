@@ -966,6 +966,58 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now()
             ],
         ]);
+        DB::table('estadosentrenamiento')->insert([
+            [
+                'nombre' => 'Programado',
+                'color' => 'warning',
+                'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'nombre' => 'En Progreso',
+                'color' => 'success',
+                'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'nombre' => 'Cancelado',
+                'color' => 'danger',
+                'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'nombre' => 'Finalizado',
+                'color' => 'danger',
+                'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+        ]);
+
+        // Partidos y Tipo: Malcolm, Miguel y Justin
+        DB::table('tipopartido')->insert([
+            [
+                'nombre' => 'Amistoso',
+                'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'nombre' => 'Campeonato',
+                'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'nombre' => 'Entrenamiento',
+                'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+        ]);
 
         $rolAdmin = Role::firstOrCreate(['name' => 'admin']);
         $rolJugador = Role::firstOrCreate(['name' => 'jugador']);

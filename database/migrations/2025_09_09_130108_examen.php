@@ -22,6 +22,27 @@ return new class extends Migration
             $table->boolean('activo')->default(true);
             $table->timestamps();
         });
+
+        //Partidos: Malcolm, Justin, Miguel
+        Schema::create('partidos', function (Blueprint $table) {
+            $table->id();
+            $table->string('entrenadorID');
+            $table->string('categoriaID');
+            $table->string('recintoID');
+            $table->string('diaID');
+            $table->time('hora_inicioID');
+            $table->time('hora_finID');
+            $table->string('tipoID');
+            $table->time('estadoID');
+            $table->boolean('activo')->default(true);
+            $table->timestamps();
+        });
+        Schema::create('tipopartido', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre')->unique();
+            $table->boolean('activo')->default(true);
+            $table->timestamps();
+        });
     }
 
     /**

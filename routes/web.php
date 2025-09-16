@@ -14,6 +14,7 @@ use App\Http\Controllers\DiasSemanaController;
 use App\Http\Controllers\EntrenamientosController;
 use App\Http\Controllers\EquipoJugadorController;
 use App\Http\Controllers\EquiposController;
+use App\Http\Controllers\EstadosEntrenamientoController;
 use App\Http\Controllers\EstadosPagoController;
 use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\HoraFinController;
@@ -29,7 +30,7 @@ use App\Http\Controllers\PosicionController;
 use App\Http\Controllers\PremiosController;
 use App\Http\Controllers\RecintosController;
 use App\Http\Controllers\RolesController;
-
+use App\Http\Controllers\TipoPartidoController;
 use Spatie\Permission\Middleware\RoleMiddleware;
 use Spatie\Permission\Middleware\PermissionMiddleware;
 
@@ -262,3 +263,15 @@ Route::post('/backoffice/estadopago/new', [EstadosPagoController::class, 'store'
 Route::post('/backoffice/estadopago/up/{id}', [EstadosPagoController::class, 'up'])->name('backoffice.estadospago.up');
 Route::post('/backoffice/estadopago/down/{id}', [EstadosPagoController::class, 'down'])->name('backoffice.estadospago.down');
 Route::post('/backoffice/estadopago/destroy/{id}', [EstadosPagoController::class, 'destroy'])->name('backoffice.estadospago.destroy');
+// EstadoEntrenamiento : Malcolm
+Route::get('/backoffice/estadosentrenamiento', [EstadosEntrenamientoController::class, 'index'])->name('backoffice.estadosentrenamiento.index');
+Route::post('/backoffice/estadosentrenamiento', [EstadosEntrenamientoController::class, 'store'])->name('backoffice.estadosentrenamiento.new');
+Route::post('/backoffice/estadosentrenamiento/up/{id}', [EstadosEntrenamientoController::class, 'up'])->name('backoffice.estadosentrenamiento.up');
+Route::post('/backoffice/estadosentrenamiento/down/{id}', [EstadosEntrenamientoController::class, 'down'])->name('backoffice.estadosentrenamiento.down');
+Route::post('/backoffice/estadosentrenamiento/destroy/{id}', [EstadosEntrenamientoController::class, 'destroy'])->name('backoffice.estadosentrenamiento.destroy');
+//Tipos de Partido: Miguel
+Route::get('/backoffice/tipopartido', [TipoPartidoController::class, 'index'])->name('backoffice.tipopartido.index');
+Route::post('/backoffice/tipopartido', [TipoPartidoController::class, 'store'])->name('backoffice.tipopartido.new');
+Route::post('/backoffice/tipopartido/up/{id}', [TipoPartidoController::class, 'up'])->name('backoffice.tipopartido.up');
+Route::post('/backoffice/tipopartido/down/{id}', [TipoPartidoController::class, 'down'])->name('backoffice.tipopartido.down');
+Route::post('/backoffice/tipopartido/destroy/{id}', [TipoPartidoController::class, 'destroy'])->name('backoffice.tipopartido.destroy');

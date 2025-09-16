@@ -153,6 +153,18 @@
                         <div>Estados de Pago</div>
                     </a>
                 </li>
+                <li class="menu-item @if (str_starts_with(Route::currentRouteName(), 'backoffice.estadosentrenamiento')) active @endif">
+                    <a href="{{ route('backoffice.estadosentrenamiento.index') }}" class="menu-link">
+                        <i class="menu-icon icon-base ti tabler-users"></i>
+                        <div>Estados de Entrenamiento</div>
+                    </a>
+                </li>
+                <li class="menu-item @if (str_starts_with(Route::currentRouteName(), 'backoffice.tipopartido')) active @endif">
+                    <a href="{{ route('backoffice.tipopartido.index') }}" class="menu-link">
+                        <i class="menu-icon icon-base ti tabler-users"></i>
+                        <div>Tipos de Partidos</div>
+                    </a>
+                </li>
             </ul>
         </li>
         {{-- ojo, aca también debe tener el active y open --}}
