@@ -24,6 +24,39 @@ return new class extends Migration
         });
 
         //Partidos: Malcolm, Justin, Miguel
+        Schema::create('entrenamientos', function (Blueprint $table) {
+            $table->id();
+            // Clave foránea a la tabla entrenadores
+            $table->integer('entrenador_id');
+            //$table->foreignId('entrenador_id'); //de javi
+                //->constrained('entrenadores') // asegúrate de que esta tabla exista
+                //->onDelete('restrict');
+            $table->foreignId('categoria_id')
+                ->constrained('categoria') // asegúrate de que esta tabla exista
+                ->onDelete('restrict');
+            $table->foreignId('recinto_id')
+                ->constrained('recintos') // asegúrate de que esta tabla exista
+                ->onDelete('restrict');
+            $table->foreignId('dia_id')
+                ->constrained('dias_semana') // asegúrate de que esta tabla exista
+                ->onDelete('restrict');
+            // Clave foránea a la tabla horarios para hora de inicio
+            $table->foreignId('hora_inicio_id')
+                ->constrained('hora_inicio') // asegúrate de que esta tabla exista
+                ->onDelete('restrict');
+            // Clave foránea a la tabla horarios para hora de fin
+            $table->foreignId('hora_fin_id')
+                ->constrained('hora_fin') // puedes usar otra tabla si es necesario
+                ->onDelete('restrict');
+            // Clave foránea a la tabla estados (programado, en juego, finalizado, etc.)
+            $table->foreignId('estado_id')
+                ->constrained('estadosentrenamiento')
+                ->onDelete('restrict');
+            // Estado activo
+            $table->boolean('activo')->default(true);
+        
+            $table->timestamps();
+        });
         Schema::create('partidos', function (Blueprint $table) {
             $table->id();
             $table->string('entrenadorID');
@@ -63,5 +96,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('desarrollador');
+        Schema::dropIfExists('entrenamientos');
     }
 };

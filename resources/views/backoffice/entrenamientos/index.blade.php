@@ -73,7 +73,7 @@
                 <!-- Role Table -->
                 <div class="card">
                     <div class="card-datatable">
-                        @component('backoffice._partials.table', [
+                        @component('backoffice._partials.table_entrenamientos', [
                             'lista' => $lista,
                             'datos' => $datos,
                         ])

@@ -223,7 +223,6 @@ Route::post('/backoffice/jugadores/destroy/{_id}', [JugadoresController::class, 
 
 
 //Entrenamientos: Miguel, Justin, Malcolm
-
 Route::get('/backoffice/entrenamiento', [EntrenamientosController::class, 'index'])->name('backoffice.entrenamiento.index');
 Route::post('/backoffice/entrenamiento', [EntrenamientosController::class, 'store'])->name('backoffice.entrenamiento.new');
 Route::post('/backoffice/entrenamiento/down/{_id}', [EntrenamientosController::class, 'down'])->name('backoffice.entrenamiento.down');

@@ -51,15 +51,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('entrenamientos', function (Blueprint $table) {
-            $table->id();
-            $table->string('entrenador');
-            $table->time('hora_inicio');
-            $table->time('hora_fin');
-            $table->boolean('activo')->default(true);
-            $table->timestamps();
-        });
-
         Schema::create('campeonato', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
@@ -133,7 +124,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('entrenamientos');
         Schema::dropIfExists('jugadores');
         Schema::dropIfExists('persona');
         Schema::dropIfExists('equipo_jugador');
