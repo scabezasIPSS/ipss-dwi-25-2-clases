@@ -25,6 +25,12 @@ use App\Http\Controllers\PremiosController;
 use App\Http\Controllers\RecintosController;
 use App\Http\Controllers\RolesController;
 
+use Spatie\Permission\Middleware\RoleMiddleware;
+use Spatie\Permission\Middleware\PermissionMiddleware;
+
+Route::aliasMiddleware('role', RoleMiddleware::class);
+Route::aliasMiddleware('permission', PermissionMiddleware::class);
+
 Route::get('/', function () {
     return view('landing/index');
 })->name('/');
@@ -57,6 +63,11 @@ Route::post('/backoffice/roles', [RolesController::class, 'store'])->name('backo
 Route::post('/backoffice/roles/down/{_id}', [RolesController::class, 'down'])->name('backoffice.roles.down');
 Route::post('/backoffice/roles/up/{_id}', [RolesController::class, 'up'])->name('backoffice.roles.up');
 Route::post('/backoffice/roles/destroy/{_id}', [RolesController::class, 'destroy'])->name('backoffice.roles.destroy');
+
+Route::put('/backoffice/roles/{id}/permissions', [RolesController::class, 'updatePermissions'])
+    ->name('backoffice.roles.update.permissions');
+Route::post('/backoffice/roles/{id}/permissions/toggle', [RolesController::class, 'togglePermission'])
+    ->name('backoffice.roles.toggle.permission');
 
 Route::get('/backoffice/cargos', [CargosController::class, 'index'])->name('backoffice.cargos.index');
 Route::post('/backoffice/cargos', [CargosController::class, 'store'])->name('backoffice.cargos.new');

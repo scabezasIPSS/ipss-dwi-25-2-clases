@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;  // Importar la fachada Hash
 use Illuminate\Validation\Rules\Password;  // Importar la clase Password
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -62,6 +63,12 @@ class UserController extends Controller
             'rut' => $request->rut,
             'password' => Hash::make($request->password),
         ]);
+
+        $rolJugador = Role::where('name', 'jugador')->first();
+
+        if ($rolJugador) {
+            $user->assignRole($rolJugador);
+        }
 
         // Opcional: Disparar el evento Registered si necesitas enviar correos de verificación, etc.
         // event(new Registered($user));
@@ -255,7 +262,8 @@ class UserController extends Controller
             return redirect()->route('/')->withErrors('Debe iniciar sesión.');
         }
         $user = Auth::user();
-        $lista = User::all();
+        $lista = User::with('roles', 'permissions')->get();
+        $roles = Role::all();
         $listaGenero = GeneroModel::all()->where('activo', 1);
         $listaCargos = CargosModel::all()->where('activo', 1);
         $listaNacionalidades = NacionalidadModel::all()->where('activo', 1);
@@ -554,7 +562,8 @@ class UserController extends Controller
                             ]
                         ]
                     ],
-                ]
+                ],
+                'has_roles' => true, // Se agrega para pasarle el rol que tiene el usuario a la vista
             ],
             'dev' => [
                 'nombre' => 'Instituto Profesional San Sebastián',
@@ -565,7 +574,8 @@ class UserController extends Controller
         return view('backoffice/users/index', [
             'datos' => $datos,
             'user' => $user,
-            'lista' => $lista
+            'lista' => $lista,
+            'roles' => $roles
         ]);
     }
 
@@ -603,6 +613,26 @@ class UserController extends Controller
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        // Asignar el rol, en base al cargo elegido en el formulario de creacion de usuario
+        // Buscar el cargo elegido
+        $cargo = CargosModel::find($request->cargoId);
+
+        if ($cargo) {
+            $rolName = strtolower($cargo->nombre);
+            $rol = Role::where('name', $rolName)->first();
+
+            if ($rol) {
+                $nuevo->assignRole($rol); // asigna rol según cargo
+            } else {
+                // Si no existe rol según cargo, asigna "jugador" por defecto
+                $rolJugador = Role::where('name', 'jugador')->first();
+                if ($rolJugador) {
+                    $nuevo->assignRole($rolJugador);
+                }
+            }
+        }
+
         return redirect()->back()->with('success', ':) Usuario creado exitosamente.');
     }
 }

@@ -8,6 +8,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -21,6 +24,7 @@ class DatabaseSeeder extends Seeder
         //   'name' => 'Test User',
         //    'email' => 'test@example.com',
         //]);
+        /*
         DB::table('users')->insert([
             [
                 'rut' => '12345678-9',
@@ -49,6 +53,7 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now()
             ],
         ]);
+        */
         DB::table('cargos')->insert([
             [
                 'nombre' => 'Entrenador',
@@ -934,7 +939,274 @@ class DatabaseSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ],
-            
+
         ]);
+
+        $rolAdmin = Role::firstOrCreate(['name' => 'admin']);
+        $rolJugador = Role::firstOrCreate(['name' => 'jugador']);
+        $rolEntrenador = Role::firstOrCreate(['name' => 'entrenador']);
+
+        $adminPermissions = [
+            'user-list',
+            'user-create',
+            'user-edit',
+            'user-delete',
+            'user-activate',
+            'user-view',
+
+            'rol-list',
+            'rol-create',
+            'rol-edit',
+            'rol-delete',
+            'rol-activate',
+            'rol-view',
+
+            'cargos-list',
+            'cargos-create',
+            'cargos-edit',
+            'cargos-delete',
+            'cargos-activate',
+            'cargos-view',
+
+            'comunas-list',
+            'comunas-create',
+            'comunas-edit',
+            'comunas-delete',
+            'comunas-activate',
+            'comunas-view',
+
+            'generos-list',
+            'generos-create',
+            'generos-edit',
+            'generos-delete',
+            'generos-activate',
+            'generos-view',
+
+            'oficios-list',
+            'oficios-create',
+            'oficios-edit',
+            'oficios-delete',
+            'oficios-activate',
+            'oficios-view',
+
+            'posiciones-list',
+            'posiciones-create',
+            'posiciones-edit',
+            'posiciones-delete',
+            'posiciones-activate',
+            'posiciones-view',
+
+            'premios-list',
+            'premios-create',
+            'premios-edit',
+            'premios-delete',
+            'premios-activate',
+            'premios-view',
+
+            'categorias-list',
+            'categorias-create',
+            'categorias-edit',
+            'categorias-delete',
+            'categorias-activate',
+            'categorias-view',
+
+            'mediospagos-list',
+            'mediospagos-create',
+            'mediospagos-edit',
+            'mediospagos-delete',
+            'mediospagos-activate',
+            'mediospagos-view',
+
+            'recintos-list',
+            'recintos-create',
+            'recintos-edit',
+            'recintos-delete',
+            'recintos-activate',
+            'recintos-view',
+
+            'camisetas-list',
+            'camisetas-create',
+            'camisetas-edit',
+            'camisetas-delete',
+            'camisetas-activate',
+            'camisetas-view',
+
+            'campeonato-list',
+            'campeonato-create',
+            'campeonato-edit',
+            'campeonato-delete',
+            'campeonato-activate',
+            'campeonato-view',
+
+            'diassemana-list',
+            'diassemana-create',
+            'diassemana-edit',
+            'diassemana-delete',
+            'diassemana-activate',
+            'diassemana-view',
+
+            'piernadominante-list',
+            'piernadominante-create',
+            'piernadominante-edit',
+            'piernadominante-delete',
+            'piernadominante-activate',
+            'piernadominante-view',
+
+            'horaInicio-list',
+            'horaInicio-create',
+            'horaInicio-edit',
+            'horaInicio-delete',
+            'horaInicio-activate',
+            'horaInicio-view',
+
+            'horaFin-list',
+            'horaFin-create',
+            'horaFin-edit',
+            'horaFin-delete',
+            'horaFin-activate',
+            'horaFin-view',
+
+            'mediocontacto-list',
+            'mediocontacto-create',
+            'mediocontacto-edit',
+            'mediocontacto-delete',
+            'mediocontacto-activate',
+            'mediocontacto-view',
+
+            'nacionalidad-list',
+            'nacionalidad-create',
+            'nacionalidad-edit',
+            'nacionalidad-delete',
+            'nacionalidad-activate',
+            'nacionalidad-view',
+
+            'perfil-list',
+            'perfil-create',
+            'perfil-edit',
+            'perfil-delete',
+            'perfil-activate',
+            'perfil-view',
+
+            'categoria-list',
+            'categoria-create',
+            'categoria-edit',
+            'categoria-delete',
+            'categoria-activate',
+            'categoria-view',
+
+            'jugadores-list',
+            'jugadores-create',
+            'jugadores-edit',
+            'jugadores-delete',
+            'jugadores-activate',
+            'jugadores-view',
+
+            'entrenamiento-list',
+            'entrenamiento-create',
+            'entrenamiento-edit',
+            'entrenamiento-delete',
+            'entrenamiento-activate',
+            'entrenamiento-view',
+        ];
+
+
+        $jugadorPermissions = [
+            'perfil-view',
+            'campeonato-list',
+            'premios-list',
+            'posiciones-list',
+            'categoria-list',
+            'recintos-list',
+            'diassemana-list',
+            'mediocontacto-list',
+            'piernadominante-list',
+            'camisetas-list',
+            'pedido-view',
+            'pedido-cancel'
+        ];
+
+
+        $entrenadorPermissions = [
+            'perfil-view',
+            'jugadores-list',
+            'jugadores-edit',
+            'categoria-list',
+            'campeonato-list',
+            'premios-list',
+            'posiciones-list',
+            'recintos-list',
+            'diassemana-list',
+            'mediocontacto-list',
+            'piernadominante-list',
+            'entrenamiento-create',
+            'entrenamiento-edit',
+            'entrenamiento-list'
+        ];
+
+        // Asignar esos permisos a los roles especificos
+        foreach ($adminPermissions as $permiso) {
+            $permission = Permission::firstOrCreate(['name' => $permiso]); // se crean los permisos
+            $rolAdmin->givePermissionTo($permission); // se asignan los permisos al rol admin
+        }
+
+        foreach ($jugadorPermissions as $permiso) {
+            $permission = Permission::firstOrCreate(['name' => $permiso]); // se crean los permisos
+            $rolJugador->givePermissionTo($permission); // se asignan los permisos al rol jugador
+        }
+
+        foreach ($entrenadorPermissions as $permiso) {
+            $permission = Permission::firstOrCreate(['name' => $permiso]); // se crean los permisos
+            $rolEntrenador->givePermissionTo($permission); // se asignan los permisos al rol entrenador
+        }
+
+        // Crear usuarios de prueba
+        $adminUser = User::firstOrCreate(
+            ['rut' => '12345678-9'],
+            [
+                'name' => 'Sebastián',
+                'lastname' => 'Cabezas',
+                'password' => Hash::make('holaMundo'),
+                'fechaNacimiento' => '1987-06-08',
+                'generoId' => 2,
+                'cargoId' => 1,
+                'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
+        );
+
+        $jugadorUser = User::firstOrCreate(
+            ['rut' => '21176572-0'],
+            [
+                'name' => 'Ethan',
+                'lastname' => 'Mayorines',
+                'password' => Hash::make('holaMundo'),
+                'fechaNacimiento' => '1987-06-08',
+                'generoId' => 2,
+                'cargoId' => 1,
+                'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
+        );
+
+        $entrenadorUser = User::firstOrCreate(
+            ['rut' => '20954121-1'],
+            [
+                'name' => 'Martina',
+                'lastname' => 'Antilef',
+                'password' => Hash::make('holaMundo'),
+                'fechaNacimiento' => '1987-06-08',
+                'generoId' => 2,
+                'cargoId' => 1,
+                'activo' => true,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
+        );
+
+        $adminUser->assignRole($rolAdmin); // Asignar el rol admin al usuario admin
+        $jugadorUser->assignRole($rolJugador); // Asignar el rol cliente al usuario cliente
+        $entrenadorUser->assignRole($rolEntrenador); // Asignar el rol entrenador al usuario entrenador
     }
 }
