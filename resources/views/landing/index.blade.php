@@ -345,7 +345,7 @@
         @endauth
     </div>
 
-    <img src="{{ asset('imgs/Jugadores_Sonkei.webp') }}" class="landing-image" alt="Dos jugadores en el campo">
+    <img src="{{ asset('https://www.sonkei.cl/imgs/v1/Jugadores_Sonkei.webp') }}" class="landing-image" alt="Dos jugadores en el campo">
     <hr class="my-5 mb-5">
 
     {{-- Carrusel --}}
