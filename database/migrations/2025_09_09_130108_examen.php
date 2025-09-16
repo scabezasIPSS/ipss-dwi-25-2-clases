@@ -43,6 +43,18 @@ return new class extends Migration
             $table->boolean('activo')->default(true);
             $table->timestamps();
         });
+        Schema::create('jugadorDelMes', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('jugadorId');
+            $table->foreign('jugadorId')->references('id')->on('jugadores')->onDelete('cascade');
+            $table->unsignedTinyInteger('mes');
+            $table->unsignedSmallInteger('año');
+            $table->string('descripcion', 300);
+            $table->dateTime('fechaPublicacion');
+            $table->unique(['año','mes']);
+            $table->boolean('activo')->default(true);
+            $table->timestamps();
+        });
     }
 
     /**

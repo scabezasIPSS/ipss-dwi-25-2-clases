@@ -208,6 +208,12 @@
                 <div>Jugadores</div>
             </a>
         </li>
+        <li class="menu-item @if (str_starts_with(Route::currentRouteName(), 'backoffice.jugadorDelMes')) active @endif">
+            <a href="{{ route('backoffice.jugadorDelMes.index') }}" class="menu-link">
+                <i class="menu-icon icon-base ti tabler-users"></i>
+                <div>Jugador del mes</div>
+            </a>
+        </li>
         <li class="menu-item @if (Route::currentRouteName() == 'backoffice.equipos.index') active @endif">
             <a href="{{ route('backoffice.equipos.index') }}" class="menu-link">
                 <i class="menu-icon icon-base ti tabler-settings"></i>

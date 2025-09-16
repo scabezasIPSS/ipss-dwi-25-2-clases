@@ -19,6 +19,7 @@ use App\Http\Controllers\EstadosPagoController;
 use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\HoraFinController;
 use App\Http\Controllers\HorainicioController;
+use App\Http\Controllers\JugadorDelMesController;
 use App\Http\Controllers\JugadoresController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\MedioContactoController;
@@ -275,3 +276,13 @@ Route::post('/backoffice/tipopartido', [TipoPartidoController::class, 'store'])-
 Route::post('/backoffice/tipopartido/up/{id}', [TipoPartidoController::class, 'up'])->name('backoffice.tipopartido.up');
 Route::post('/backoffice/tipopartido/down/{id}', [TipoPartidoController::class, 'down'])->name('backoffice.tipopartido.down');
 Route::post('/backoffice/tipopartido/destroy/{id}', [TipoPartidoController::class, 'destroy'])->name('backoffice.tipopartido.destroy');
+
+// Rutas agregadas para jugadores del mes: Javi, Indira, Paula
+// Rutas para Jugador del Mes (solo lo necesario por ahora)
+Route::get('/backoffice/jugadorDelMes', [JugadorDelMesController::class, 'index'])
+    ->name('backoffice.jugadorDelMes.index');
+Route::post('/backoffice/jugadorDelMes', [JugadorDelMesController::class, 'storeDestacado'])
+    ->name('backoffice.jugadorDelMes.new');
+Route::post('/backoffice/jugadorDelMes/down/{_id}', [JugadorDelMesController::class, 'down'])->name('backoffice.jugadorDelMes.down');
+Route::post('/backoffice/jugadorDelMes/up/{_id}', [JugadorDelMesController::class, 'up'])->name('backoffice.jugadorDelMes.up');
+Route::post('/backoffice/jugadorDelMes/destroy/{_id}', [JugadorDelMesController::class, 'destroy'])->name('backoffice.jugadorDelMes.destroy');
