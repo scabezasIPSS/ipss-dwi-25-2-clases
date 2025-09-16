@@ -360,21 +360,21 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="{{ asset('assets/imgs/Carrusel1.webp') }}" class="d-block w-100" alt="Imagen de Carrusel 1">
+                <img src="https://www.sonkei.cl/imgs/v1/Carrusel1.webp" class="d-block w-100" alt="Imagen de Carrusel 1">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Entrenamientos intensos</h5>
                     <p>Nuestros jugadores se preparan para el éxito en cada sesión.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('assets/imgs/Carrusel2.webp') }}" class="d-block w-100" alt="Imagen de Carrusel 2">
+                <img src="https://www.sonkei.cl/imgs/v1/Carrusel2.webp" class="d-block w-100" alt="Imagen de Carrusel 2">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Momentos de gloria</h5>
                     <p>Cada partido es una oportunidad para demostrar nuestro talento.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('assets/imgs/Carrusel3.webp') }}" class="d-block w-100" alt="Imagen de Carrusel 3">
+                <img src="https://www.sonkei.cl/imgs/v1/Carrusel3.webp" class="d-block w-100" alt="Imagen de Carrusel 3">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Comunidad unida</h5>
                     <p>Somos más que un equipo, somos una familia.</p>
@@ -560,7 +560,7 @@
                 </div>
 
                 <div class="col-md-4 mb-4">
-                    <img src="{{ asset('assets/imgs/Balon.webp') }}" alt="Balón de fútbol"
+                    <img src="https://www.sonkei.cl/imgs/v1/Balon.webp" alt="Balón de fútbol"
                         class="img-fluid footer-ball-image">
                 </div>
 
