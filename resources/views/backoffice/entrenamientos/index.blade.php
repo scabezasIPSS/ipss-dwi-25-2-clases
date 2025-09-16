@@ -86,7 +86,7 @@
         <!--/ Role cards -->
 
         <!-- Add Role Modal -->
-        @component('backoffice._partials.modal', [
+        @component('backoffice._partials.modal_entrenamiento', [
             'titulo' => $datos['mantenedor']['titulo'],
             'instruccion' => $datos['mantenedor']['instruccion'],
             'accion' => 'new',

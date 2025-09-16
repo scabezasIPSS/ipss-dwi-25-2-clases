@@ -6,6 +6,7 @@ use App\Models\EntrenamientosModel;
 use App\Models\CategoriaModel;
 use App\Models\RecintosModel;
 use App\Models\DiasSemanaModel;
+use App\Models\EntrenadoresModel;
 use App\Models\HorainicioModel;
 use App\Models\HoraFinModel;
 use App\Models\EstadosEntrenamientoModel;
@@ -26,16 +27,7 @@ class EntrenamientosController extends Controller
         $user = Auth::user();
 
         $lista = EntrenamientosModel::all();
-        $listaEntrenadores = [
-            [
-                "id" => 1,
-                "nombre" => "entrenador 1"
-            ],
-            [
-                "id" => 2,
-                "nombre" => "entrenador 2"
-            ],
-        ];
+        $listaEntrenadores = EntrenadoresModel::all()->where('activo',1);
         // $listaJugadores = JugadoresModel::all()->where('activo', 1);
         $listaCategorias = CategoriaModel::all()->where('activo', 1);
         $listaRecintos = RecintosModel::all()->where('activo', 1);
